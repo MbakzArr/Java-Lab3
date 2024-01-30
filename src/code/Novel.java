@@ -1,11 +1,11 @@
 class Novel {
     private final String Title;
     private final String AuthorName;
-    private final String YearPublished;
+    private final int YearPublished;
 
     public Novel(final String Title,
                  final String AuthorName,
-                 final String YearPublished)
+                 final int YearPublished)
     {
         this.AuthorName    = AuthorName;
         this.Title         = Title;
@@ -20,7 +20,7 @@ class Novel {
     {
         return AuthorName;
     }
-    public String getYearPublished()
+    public int getYearPublished()
     {
         return YearPublished;
     }
