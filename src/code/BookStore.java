@@ -134,9 +134,32 @@ public class BookStore {
             }
         }
     }
+    public void printTitlesContaining(String substring,
+                                      boolean caseSensitive){
+        for(Novel novel: novels){
+            if(novel != null){
+                if (novel.getTitle() != null){
+                    System.out.println(novel.getTitle().contains(substring));
+                }
+            }
+        }
+    }
+    public void printTitlesOfLength(int length){
+        for(Novel novel: novels){
+            if(novel != null){
+                if (novel.getTitle() != null){
+                    System.out.println(novel.getTitle().length());
+                }
+            }
+        }
+    }
+
     public static void main(String[] args){
         BookStore b = new BookStore(args[0]);
         b.printAllTitles();
+        //b.printTitlesContaining();
+
 
     }
+
 }
