@@ -1,27 +1,29 @@
-class Novel {
-    private final String Title;
-    private final String AuthorName;
-    private final int YearPublished;
 
-    public Novel(final String Title,
-                 final String AuthorName,
-                 final int YearPublished)
-    {
-        this.AuthorName    = AuthorName;
-        this.Title         = Title;
-        this.YearPublished = YearPublished;
-    }
-    public String getTitle()
-    {
-        return Title;
+public class Novel {
+    // Novel properties
+    private final String title;
+    private final String authorName;
+    private final int yearPublished;
 
+    // Novel constructor
+    public Novel(String title, String authorName, int yearPub) {
+        this.title = title;
+        this.authorName = authorName;
+        this.yearPublished = yearPub;
     }
-    public String getAuthorName()
-    {
-        return AuthorName;
+
+    // Getter method for title
+    public String getTitle() {
+        return title;
     }
-    public int getYearPublished()
-    {
-        return YearPublished;
+
+    // Getter method for author name
+    public String getAuthorName() {
+        return authorName;
+    }
+
+    // Getter method for year the book published
+    public int getYearPublished() {
+        return yearPublished;
     }
 }

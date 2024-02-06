@@ -1,29 +1,34 @@
+
+
 import java.util.ArrayList;
 
 public class BookStore {
-    final String BookStoreName;
-    ArrayList<Novel> novels;
+    // Book store properties
+    private String bookStoreName;
+    private final ArrayList<Novel> novels;
 
-    public BookStore(String BookStoreName)
-    {
-        this.BookStoreName = BookStoreName;
-        this.novels = new ArrayList<>();
+    public BookStore(String bookStoreName) {
+        // Book store constructor
+        this.bookStoreName = bookStoreName;
+        novels = new ArrayList<Novel>();
 
-
-        if(BookStoreName.equalsIgnoreCase("Amazon")){
-            BookStoreName = "Chapters";
+        // The constructor does not accept name of “Amazon”
+        // However; if the name is “Amazon”, it changes it to “Chapters” instead
+        if(bookStoreName.equalsIgnoreCase("Amazon")) {
+            this.bookStoreName = "Chapters";
         }
+
         novels.add(new Novel("The Adventures of Augie March", "Saul Bellow", 1953));
-        novels.add(new Novel("All the King’s Men", "Robert Penn Warren", 1946));
+        novels.add(new Novel("All the Kings's Men", "Robert Penn Warren", 1946));
         novels.add(new Novel("American Pastoral", "Philip Roth", 1997));
         novels.add(new Novel("An American Tragedy", "Theodore Dreiser", 1925));
         novels.add(new Novel("Animal Farm", "George Orwell", 1946));
         novels.add(new Novel("Appointment in Samarra", "John O'Hara", 1934));
         novels.add(new Novel(null, null, 0));
-        novels.add(new Novel("author name 1", "0", 0));
-        novels.add(new Novel(null, "0", 0));
-        novels.add(new Novel(null, "author name 2", 0));
-        novels.add(new Novel("title 2", null, 0));
+        novels.add(new Novel(null, "author name 1", 0));
+        novels.add(new Novel("", null, 0));
+        novels.add(new Novel(null, "", 0));
+        novels.add(new Novel("title 1", null, 0));
         novels.add(new Novel("", "", 0));
         novels.add(new Novel("", "author name 2", 0));
         novels.add(new Novel("title 2", null, 0));
@@ -34,8 +39,8 @@ public class BookStore {
         novels.add(new Novel("Beloved", "Toni Morrison", 1987));
         novels.add(new Novel("The Berlin Stories", "Christopher Isherwood", 1946));
         novels.add(new Novel("The Big Sleep", "Raymond Chandler", 1939));
-        novels.add(new Novel("The Blind Assassin", "Margaret Atwood", 2000));
-        novels.add(new Novel("Blood Meridian", "Cormac McCarthy", 1986));
+        novels.add(new Novel("The Blind Assassin", "Margaret Atwood",2000 ));
+        novels.add(new Novel("Blood Meridian", "Cormac McCarthy", 1989));
         novels.add(new Novel("Brideshead Revisited", "Evelyn Waugh", 1946));
         novels.add(new Novel("The Bridge of San Luis Rey", "Thornton Wilder", 1927));
         novels.add(new Novel("Call It Sleep", "Henry Roth", 1935));
@@ -45,7 +50,7 @@ public class BookStore {
         novels.add(new Novel("The Confessions of Nat Turner", "William Styron", 1967));
         novels.add(new Novel("The Corrections", "Jonathan Franzen", 2001));
         novels.add(new Novel("The Crying of Lot 49", "Thomas Pynchon", 1966));
-        novels.add(new Novel("A Dance to the Music of Time", "Anthony Powell", 1951));
+        novels.add(new Novel("A Dance to the Music of Time", "Anthony Powell",1951 ));
         novels.add(new Novel("The Day of the Locust", "Nathanael West", 1939));
         novels.add(new Novel("Death Comes for the Archbishop", "Willa Cather", 1927));
         novels.add(new Novel("A Death in the Family", "James Agee", 1958));
@@ -107,7 +112,7 @@ public class BookStore {
         novels.add(new Novel("The Sot-Weed Factor", "John Barth", 1960));
         novels.add(new Novel("The Sound and the Fury", "William Faulkner", 1929));
         novels.add(new Novel("The Sportswriter", "Richard Ford", 1986));
-        novels.add(new Novel("The Spy Who Came in from the Cold", "John le Carré", 1964));
+        novels.add(new Novel("The Spy Who Came in from the Cold", "John le Carre", 1964));
         novels.add(new Novel("The Sun Also Rises", "Ernest Hemingway", 1926));
         novels.add(new Novel("Their Eyes Were Watching God", "Zora Neale Hurston", 1937));
         novels.add(new Novel("Things Fall Apart", "Chinua Achebe", 1959));
@@ -123,43 +128,119 @@ public class BookStore {
         novels.add(new Novel("Wide Sargasso Sea", "Jean Rhys", 1966));
 
         System.out.println(novels.size());
-        System.out.println(this.BookStoreName);
+        System.out.println(this.bookStoreName);
+
     }
-    public void printAllTitles(){
-        for(Novel novel: novels){
-            if(novel != null){
-                if (novel.getTitle() != null){
+    // Printing all books titles
+    public void printAllTitles() {
+        for(Novel novel: novels) {
+            if(novel != null) {
+                if(novel.getTitle() != null && !novel.getTitle().isEmpty()) {
                     System.out.println(novel.getTitle().toUpperCase());
                 }
             }
         }
     }
-    public void printTitlesContaining(String substring,
-                                      boolean caseSensitive){
-        for(Novel novel: novels){
-            if(novel != null){
-                if (novel.getTitle() != null){
-                    System.out.println(novel.getTitle().contains(substring));
-                }
-            }
-        }
-    }
-    public void printTitlesOfLength(int length){
-        for(Novel novel: novels){
-            if(novel != null){
-                if (novel.getTitle() != null){
-                    System.out.println(novel.getTitle().length());
+
+    /**
+     * Method below prints all titles that contain the specified substring;
+     * If caseSensitive is false, then the match is in any letter casing
+     * (e.g. “The” is the same as “the”);
+     * If caseSensitive is true then the match must include letter casing
+     * (e.g. “The” is different from “the”)
+     * */
+    public void printTitlesContaining(final String substring, final boolean caseSensitive) {
+        for(final Novel novel : novels) {
+            if(novel.getTitle() != null && !novel.getTitle().isEmpty()) {
+                if (!caseSensitive) {
+                    if (novel.getTitle().toLowerCase().contains(substring)) {
+                        System.out.println(novel.getTitle());
+                    }
+                } else if (novel.getTitle().contains(substring)) {
+                    System.out.println(novel.getTitle());
                 }
             }
         }
     }
 
-    public static void main(String[] args){
+    /**
+     * Method below print all titles that are of exactly the specified length
+     * */
+    public void printTitlesOfLength(int length) {
+        for(final Novel novel : novels) {
+            if(novel.getTitle() != null && !novel.getTitle().isEmpty()) {
+                if (novel.getTitle().length() == length) {
+                    System.out.println(novel.getTitle());
+                }
+            }
+        }
+    }
+
+    /**
+     * Method below prints all author names that either start or end with substring
+     * In lowercase…the substring match is case-insensitive
+     * (e.g. “aN” is the same as “An”, etc.)
+     * */
+    public void printNameStartsEndsWith(String substring) {
+        for(Novel novel : novels) {
+            if(novel.getAuthorName() != null && !novel.getAuthorName().isEmpty()) {
+                if (novel.getAuthorName().toLowerCase().startsWith(substring.toLowerCase()) || novel.getAuthorName().toLowerCase().endsWith(substring.toLowerCase())) {
+                    System.out.println(novel.getAuthorName().toLowerCase());
+                }
+            }
+        }
+    }
+
+    /**
+     * If the property argument is “author” then return the longest author name
+     * If the property argument is “title” then return the longest title
+     * If the property argument is something else then return null
+     * */
+    public String getLongest(final String property) {
+        String currentProperty;
+        int currentLongestProperty;
+        String longestPropertyItem;
+
+        currentLongestProperty  = 0;
+        longestPropertyItem     = null;
+
+        if(property.equalsIgnoreCase("author")) {
+            for(final Novel novel: novels) {
+                currentProperty = novel.getAuthorName();
+                if (currentProperty != null && !currentProperty.isEmpty()) {
+                    if (currentProperty.length() > currentLongestProperty) {
+                        currentLongestProperty = currentProperty.length();
+                        longestPropertyItem = currentProperty;
+
+                    }
+                }
+            }
+        }
+
+        if(property.equalsIgnoreCase("title")) {
+            for(final Novel novel: novels) {
+                currentProperty = novel.getTitle();
+                if(currentProperty != null && !currentProperty.isEmpty()) {
+                    if (currentProperty.length() > currentLongestProperty) {
+                        currentLongestProperty = currentProperty.length();
+                        longestPropertyItem = currentProperty;
+                    }
+                }
+            }
+        }
+        return longestPropertyItem;
+    }
+
+    public static void main(String[] args) {
         BookStore b = new BookStore(args[0]);
         b.printAllTitles();
-        //b.printTitlesContaining();
-
+        b.printTitlesContaining("the", false);
+        b.printTitlesContaining("the", true);
+        b.printTitlesOfLength(13);
+        b.printNameStartsEndsWith("aN");
+        System.out.println(b.getLongest("xyz"));
+        System.out.println(b.getLongest("AutHor"));
+        System.out.println(b.getLongest("titlE"));
 
     }
-
 }
